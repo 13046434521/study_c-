@@ -155,3 +155,8 @@ int main() {
 }
 
 ```
+
+## 静态开辟内存和动态开辟内存
+### Boolean值
+    C中的boolean值，非0值就是true
+    0 == false;

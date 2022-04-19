@@ -172,3 +172,132 @@ int main() {
     悬空指针：通过free对内存进行释放，但是释放的指针仍旧指向内存地址。
     野指针：空的，没有指向地址的指针。int * p;
     这两种写法等价：aar[ i ] = * (aar + i);
+    realloc 重新开辟空间，返回初始地址
+
+## 字符串
+### 字符串打印：
+    printf打印字符串时需要以'\0'为结尾。
+    数组：char data[] ={'j','t','l'}; //这个没有以'\0'为结尾，直接打印会乱码
+    指针：char *data ="jtl"; 默认以'\0'为结尾
+### 字符串的修改：
+    字符串保存在全局区。不能修改。
+    数组：相当于将字符串从全局区拷贝到栈中，所以可以修改
+    指针：指向全局区的字符串。不能修改，否则崩溃
+```c
+#include "stdio.h"
+
+// printf 输出字符串需要以'\0'结尾
+// 只有字符串以'\0'结尾
+int main(){
+    // 正常情况
+    printf("\n------正常情况------\n");
+    //将字符串从全局区/静态区拷贝到栈空间。在栈空间操作
+    char aar[] = {'J','i','a','T','i','a','n','L','o','n','g'};
+    printf("第一种方式：%s\n",aar);
+    printf("\n------------\n");
+
+    // 这种方式，默认在最后加上\0 所以不会出问题
+    // 将指针指向，全局区/静态区的地址。
+    // 无法修改全局区的数据，会崩溃
+    char * aar1 = "JiaTianLong";
+    printf("第二种方式：%s\n",aar1);
+    printf("\n------替换元素------\n");
+    // 替换元素
+//    aar1[3] = 'J';// 写这个会崩溃，无法修改全局区的数据
+//    printf(aar1);
+
+    int test[] = {1,2,3};
+    printf("%d",*(test+2));
+}
+```
+### 数组的传递：
+    方法参数不管是指针还是数组，都会被编译器优化成指针。取大小时都是指针的大小。
+```c
+#include "stdio.h"
+int getLength(char * string);
+void getLengthAar(char data[]);
+void getLength2(char *string,int* length);
+
+int main(){
+    char * aar = "abcde";
+    int length = getLength(aar);
+
+    printf("指针测得长度:%d\n",length);
+
+
+    char aar1[] = {'a','b','c','d','e','\0'};
+
+    int length1 = getLength(aar1);
+    printf("数组测得长度:%d\n",length1);
+
+
+    getLengthAar(aar1);
+    getLengthAar(aar);
+
+    int length2 = 0;
+    getLength2(aar,&length2);
+    printf("getLength2传的参数的长度:%d\n",length2);
+    getLength2(aar1,&length2);
+    printf("getLength2传的数组参数的长度:%d\n",length2);
+}
+
+int getLength(char * data){
+    int count = 0;
+    //  while (*data) : *data!='\0'
+    while (*data){
+        count++;
+        data++;
+    }
+    return count;
+}
+
+// 参数不管是指针还是数组，都会被编译器优化程指针
+// 64位的编译器是8字节的，所以data长度是8
+void getLengthAar(char data[]){
+    printf("getLengthAar传的参数的长度:%d\n",sizeof (data));
+}
+void getLength2(char *string,int* length){
+    int count = 0;
+    while (*string){
+        string++;
+        count++;
+    }
+
+    *length = count;
+}
+```
+    
+
+### 字符串的比较：string.h文件
+    strcmp  ：区分大小写比较
+    strcmpi ：不区分大小写比较
+    返回-0，相同
+### 字符串的拷贝和拼接
+    strcpy  ：拷贝
+    strcat  : 拼接
+ 
+### 字符串大小写转换
+```c
+#include "stdio.h"
+#include "ctype.h"
+
+void lower(char* dest,char* src);
+
+int main(){
+    char res [25];
+    char *name ="Jia Tian Long";
+    lower(res,name);
+
+    printf("result : %s",res);
+}
+// 不管是指针还是数组，都被优化成指针
+void lower(char* dest,char* src){
+    char * temp = src;
+    while (*temp){
+        *dest = tolower(*temp);//传的是地址
+        dest++;
+        temp++;
+    }
+    *dest = '\0';//需加上'\0'
+}
+```

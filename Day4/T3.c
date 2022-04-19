@@ -37,7 +37,7 @@ int getLength(char * data){
 }
 
 // 参数不管是指针还是数组，都会被编译器优化程指针
-// 64位的编译器是8字节的，所以是8
+// 64位的编译器是8字节的，所以data长度是8
 void getLengthAar(char data[]){
     printf("getLengthAar传的参数的长度:%d\n",sizeof (data));
 }

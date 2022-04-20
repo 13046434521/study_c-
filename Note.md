@@ -301,3 +301,57 @@ void lower(char* dest,char* src){
     *dest = '\0';//需加上'\0'
 }
 ```
+
+## 结构体
+#### 结构体写法
+    1. 必须以分号结尾
+    2. 结构体中的字符串数组，必须拷贝strcpy赋值。指针则不用
+    3. 结构体可以直接在末尾定义变量
+    4. 结构体指针用->来调用参数，结构体用 . 来调用
+    5. typedef 用来定义别名。可以避免VS和CLion中不同写法带来的代码差异
+    5. 枚举多数以int值形式定义，之后每一个加1
+```c
+struct Dog{
+    //成员
+    char name[10];
+    int age;
+    char sex;
+};//必须有分号结尾。
+
+struct Person{
+    char*name;
+    char sex;
+    int age;
+} JTL = {"jtl",'M',29},
+MG={"cx",'W',30},
+DEFAULT;//没有赋值，都是默认值
+typedef struct Dog Doa;
+typedef Doa* dog_p;
+
+
+// typedef  定义别名
+// VS中结构体：Dog dog; //不需加关键字struct
+// Clion中：struct Dog dog;// 需加关键字struct
+// 结构体用'.'
+// 结构体指针用'->'
+int main(){
+    // 结构体
+    struct Cat cat = {"Cola",1};
+    cat.age = 2;
+    printf("name:%s,age:%d\n",cat.name,cat.age);
+
+    // 结构体指针
+    struct Cat* cat1 = &Ice;
+    cat1->age = 3;
+    printf("name:%s,age:%d\n",cat1->name,cat1->age);
+}
+
+enum LAUGUAGE{
+    CPP=1,
+    JAVA,
+    KT,
+    PYTHON
+};
+
+typedef enum LAUGUAGE LAUGUAGE;
+```

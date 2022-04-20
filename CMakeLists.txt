@@ -3,4 +3,4 @@ project(StudyC C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(StudyC  Day5/T8.c)
+add_executable(StudyC Day5/T9.c)

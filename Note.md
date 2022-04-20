@@ -309,7 +309,8 @@ void lower(char* dest,char* src){
     3. 结构体可以直接在末尾定义变量
     4. 结构体指针用->来调用参数，结构体用 . 来调用
     5. typedef 用来定义别名。可以避免VS和CLion中不同写法带来的代码差异
-    5. 枚举多数以int值形式定义，之后每一个加1
+    6. 枚举多数以int值形式定义，之后每一个加1
+    7. 在定义枚举时，可以直接使用别名。typedef + 关键字 +别名 +;
 ```c
 struct Dog{
     //成员
@@ -354,4 +355,10 @@ enum LAUGUAGE{
 };
 
 typedef enum LAUGUAGE LAUGUAGE;
+// 直接定义 枚举
+typedef enum {
+    CHINA =1,
+    RUSS,
+    FRANCE,
+}Country;
 ```

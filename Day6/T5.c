@@ -8,7 +8,7 @@
 
 
 int main(){
-    char* path = "G:\\ClionProject\\StudyC\\Note.md";
+    char* path = "C:\\Users\\Administrator\\CLionProjects\\untitled1\\Note.md";
     char *mode = "r";
 
     FILE  *file = fopen(path,mode);
@@ -18,7 +18,7 @@ int main(){
     fseek(file,0,SEEK_END);
     long size = ftell(file);
 
-    printf("多少个字节:%d\n",size);
+    printf("多少个字节：%d\n",size);
     fclose(file);
     return 0;
 }

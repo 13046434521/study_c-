@@ -338,6 +338,10 @@ typedef Doa* dog_p;
 // Clion中：struct Dog dog;// 需加关键字struct
 // 结构体用'.'
 // 结构体指针用'->'
+struct Cat{
+    char*name;
+    int age;
+}Ice={"Ice",1};
 int main(){
     // 结构体
     struct Cat cat = {"Cola",1};
@@ -349,6 +353,9 @@ int main(){
     cat1->age = 3;
     printf("name:%s,age:%d\n",cat1->name,cat1->age);
 }
+```
+```C
+#include "stdio.h"
 
 enum LAUGUAGE{
     CPP=1,
@@ -358,12 +365,22 @@ enum LAUGUAGE{
 };
 
 typedef enum LAUGUAGE LAUGUAGE;
-// 直接定义 枚举
+// 直接定义枚举并且设置别名
 typedef enum {
     CHINA =1,
     RUSS,
     FRANCE,
-}Country;
+}country;
+int main(){
+    // VS中写法： LAUGUAGE lauguage = JAVA;
+    // CLion中写法： enum LAUGUAGE lauguage = JAVA;
+
+    LAUGUAGE lauguage =JAVA;
+    LAUGUAGE lauguage1 =KT;
+    LAUGUAGE lauguage2=PYTHON;
+    country c = CHINA;
+    printf("%d,%d,%d",lauguage,lauguage1,lauguage2);
+}
 ```
 
 ### 文件操作
